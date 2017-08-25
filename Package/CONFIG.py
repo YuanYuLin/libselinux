@@ -21,14 +21,16 @@ def set_global(args):
     output_dir = args["output_path"]
     arch = ops.getEnv("ARCH_ALT")
     if arch == "armhf":
-        src_lib_dir = iopc.getBaseRootFile("/lib/arm-linux-gnueabihf")
+        src_lib_dir = iopc.getBaseRootFile("lib/arm-linux-gnueabihf")
     elif arch == "armel":
-        src_lib_dir = iopc.getBaseRootFile("/lib/arm-linux-gnueabi")
+        src_lib_dir = iopc.getBaseRootFile("lib/arm-linux-gnueabi")
+    elif arch == "x86_64":
+        src_lib_dir = iopc.getBaseRootFile("lib/x86_64-linux-gnu")
     else:
         sys.exit(1)
     dst_lib_dir = ops.path_join(output_dir, "lib")
 
-    src_include_dir = iopc.getBaseRootFile("/usr/include/selinux")
+    src_include_dir = iopc.getBaseRootFile("usr/include/selinux")
     dst_include_dir = ops.path_join("include",args["pkg_name"])
 
 def MAIN_ENV(args):

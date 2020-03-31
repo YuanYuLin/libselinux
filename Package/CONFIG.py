@@ -41,8 +41,11 @@ def MAIN_EXTRACT(args):
     set_global(args)
 
     ops.mkdir(dst_lib_dir)
-    ops.copyto(ops.path_join(src_lib_dir, "libselinux.so.1"), dst_lib_dir)
-    ops.ln(dst_lib_dir, "libselinux.so.1", "libselinux.so")
+
+
+    lib_so = "libselinux.so.1"
+    ops.copyto(ops.path_join(src_lib_dir, lib_so), dst_lib_dir)
+    ops.ln(dst_lib_dir, lib_so, "libselinux.so")
     return True
 
 def MAIN_PATCH(args, patch_group_name):
@@ -73,7 +76,6 @@ def MAIN_INSTALL(args):
     iopc.installBin(args["pkg_name"], ops.path_join(src_include_dir, "get_context_list.h"), dst_include_dir)
     iopc.installBin(args["pkg_name"], ops.path_join(src_include_dir, "get_default_type.h"), dst_include_dir)
     iopc.installBin(args["pkg_name"], ops.path_join(src_include_dir, "label.h"), dst_include_dir)
-    iopc.installBin(args["pkg_name"], ops.path_join(src_include_dir, "restorecon.h"), dst_include_dir)
     iopc.installBin(args["pkg_name"], ops.path_join(src_include_dir, "selinux.h"), dst_include_dir)
     iopc.installBin(args["pkg_name"], ops.path_join(dst_lib_dir, "."), "lib") 
     return False
